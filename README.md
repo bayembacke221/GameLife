@@ -53,6 +53,27 @@ Utilisation
 - Commentaires Supplémentaires
 - Le code source est commenté pour expliquer chaque fonction et son rôle dans le fonctionnement du jeu.
 
+## Exécution du Programme
+
+Pour exécuter l'application "The Game of Life", suivez ces étapes simples :
+
+1- Accès à l'Application : Ouvrez votre navigateur web et accédez à l'URL suivante : [GameLife](https://lifeegame.netlify.app/) .
+
+2- Configuration de la Grille : Choisissez la taille de la grille en utilisant les listes déroulantes pour le nombre de lignes et de colonnes.
+
+3- Interaction avec la Grille : Cliquez sur les cellules pour les activer ou les désactiver selon votre configuration initiale.
+
+4- Contrôle du Jeu : Utilisez les boutons de contrôle situés sous la grille.
+
+- "Start": Démarre le jeu.
+- "Pause": Met en pause le jeu.
+- "Continue": Continue le jeu après une pause.
+- "Clear": Efface la grille et arrête le jeu.
+- "Random": Génère une configuration aléatoire pour commencer le jeu.
+
+
+5- Arrêt de l'Application : Pour arrêter complètement l'application, fermez simplement l'onglet du navigateur.
+
 ## Auteur
 
 Ce projet a été réalisé par Mbacke Mbaye en réponse au défi lancé par le Master Elias Ba sur X/Twitter à la communauté Galsen Dev

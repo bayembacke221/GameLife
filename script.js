@@ -1,4 +1,3 @@
-// Déclaration des variables globales
 var rows = 25;
 var cols = 50;
 var playing = false;
@@ -7,8 +6,8 @@ var nextGrid = new Array(rows);
 var timer;
 
 /**
- * Initialisation les grilles principale et de travail
- * */ 
+ * Initialise les grilles principale et de travail.
+ */
 function initializeGrids() {
     for (var i = 0; i < rows; i++) {
         grid[i] = new Array(cols);
@@ -17,8 +16,8 @@ function initializeGrids() {
 }
 
 /**
- * Réinitialisation des grilles principale et de travail avec des cellules mortes
- * */ 
+ * Réinitialise les grilles principale et de travail avec des cellules mortes.
+ */
 function resetGrids() {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
@@ -29,8 +28,8 @@ function resetGrids() {
 }
 
 /**
- * Copie le contenu de la grille de travail dans la grille principale et réinitialise la grille de travail
- * */ 
+ * Copie le contenu de la grille de travail dans la grille principale et réinitialise la grille de travail.
+ */
 function copyAndResetGrid() {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
@@ -41,8 +40,8 @@ function copyAndResetGrid() {
 }
 
 /**
- * Création de la table initiale dans le conteneur spécifié
- *  */ 
+ * Crée la table initiale dans le conteneur spécifié.
+ */
 function createTable() {
     var container = document.getElementById('container');
     if (!container) {
@@ -67,8 +66,8 @@ function createTable() {
 }
 
 /**
- * Gèstion de clics sur une cellule pour la faire passer de morte à vivante ou vice versa
- * */ 
+ * Gestion des clics sur une cellule pour la faire passer de morte à vivante ou vice versa.
+ */
 function cellClickHandler() {
     var rowcol = this.id.split("_");
     var row = rowcol[0];
@@ -85,8 +84,8 @@ function cellClickHandler() {
 }
 
 /**
- * Mise à jour la vue en fonction de l'état actuel de la grille
- * */ 
+ * Met à jour la vue en fonction de l'état actuel de la grille.
+ */
 function updateView() {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
@@ -97,11 +96,11 @@ function updateView() {
 }
 
 /**
- * Gestion des boutons de contrôle
- * */ 
+ * Gestion des boutons de contrôle.
+ */
 function setupControlButtons() {
     var startButton = document.getElementById('start');
-    startButton.onclick = startButtonHandler;
+    startButton.onclick = toggleGame;
 
     var clearButton = document.getElementById('clear');
     clearButton.onclick = clearButtonHandler;
@@ -111,8 +110,8 @@ function setupControlButtons() {
 }
 
 /**
- * Initialisation d'une grille aléatoire pour commencer le jeu
- * */ 
+ * Initialisation d'une grille aléatoire pour commencer le jeu.
+ */
 function randomButtonHandler() {
     if (playing) return;
     clearButtonHandler();
@@ -129,8 +128,8 @@ function randomButtonHandler() {
 }
 
 /**
- * Réinitialisation du jeu en arrêtant le jeu, réinitialisant les boutons et nettoyant la grille
- * */ 
+ * Réinitialisation du jeu en arrêtant le jeu, réinitialisant les boutons et nettoyant la grille.
+ */
 function clearButtonHandler() {
     playing = false;
     var startButton = document.getElementById('start');
@@ -148,24 +147,24 @@ function clearButtonHandler() {
 }
 
 /**
- * Gère le bouton de démarrage en alternant entre démarrage et pause
- * */ 
-function startButtonHandler() {
-    if (playing) {
-        playing = false;
-        this.innerHTML = "Continue";
-        clearTimeout(timer);
+ * Gère le bouton de démarrage en alternant entre démarrage et pause.
+ */
+function toggleGame() {
+    playing = !playing;
+    var startButton = document.getElementById('start');
+    startButton.innerHTML = playing ? "Pause" : "Continue";
+    clearTimeout(timer);
+
+    if (!playing) {
+        clearButtonHandler();
     } else {
-        playing = true;
-        this.innerHTML = "Pause";
         play();
     }
 }
 
 /**
- * 
- * Exécution du jeu, calcul de la génération suivante et planification de la prochaine itération
- * */ 
+ * Exécution du jeu, calcul de la génération suivante et planification de la prochaine itération.
+ */
 function play() {
     computeNextGen();
     if (playing) {
@@ -174,8 +173,8 @@ function play() {
 }
 
 /**
- * Calcul de la génération suivante en appliquant les règles du jeu de la vie
- * */ 
+ * Calcul de la génération suivante en appliquant les règles du jeu de la vie.
+ */
 function computeNextGen() {
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < cols; j++) {
@@ -188,8 +187,8 @@ function computeNextGen() {
 }
 
 /**
- * Appliquer les règles du jeu de la vie à la cellule spécifiée
- * */ 
+ * Appliquer les règles du jeu de la vie à la cellule spécifiée.
+ */
 function applyRules(row, col) {
     var numNeighbors = countNeighbors(row, col);
     if (grid[row][col] == 1) {
@@ -204,8 +203,8 @@ function applyRules(row, col) {
 }
 
 /**
- * Compter le nombre de voisins vivants autour de la cellule spécifiée
- * */ 
+ * Compter le nombre de voisins vivants autour de la cellule spécifiée.
+ */
 function countNeighbors(row, col) {
     var count = 0;
     for (var i = row - 1; i <= row + 1; i++) {
@@ -219,8 +218,8 @@ function countNeighbors(row, col) {
 }
 
 /**
- * Mise à jour de la taille de la grille en fonction des sélections dans les listes déroulantes
- * */ 
+ * Mise à jour de la taille de la grille en fonction des sélections dans les listes déroulantes.
+ */
 function updateGridSize() {
     var rowsDropdown = document.getElementById('rows');
     var colsDropdown = document.getElementById('cols');
@@ -228,7 +227,6 @@ function updateGridSize() {
     rows = parseInt(rowsDropdown.value);
     cols = parseInt(colsDropdown.value);
 
-    
     var container = document.getElementById('container');
     container.innerHTML = '';
 
@@ -240,12 +238,12 @@ function updateGridSize() {
 }
 
 /**  
- * Événements déclenchés par les changements dans les listes déroulantes
- * */
+ * Événements déclenchés par les changements dans les listes déroulantes.
+ */
 document.getElementById('rows').addEventListener('change', updateGridSize);
 document.getElementById('cols').addEventListener('change', updateGridSize);
 
 /**
- * Exécution de la mise à jour initiale de la grille lors du chargement de la page
- * */ 
+ * Exécution de la mise à jour initiale de la grille lors du chargement de la page.
+ */
 window.onload = updateGridSize;
